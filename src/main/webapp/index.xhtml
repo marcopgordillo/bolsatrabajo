@@ -38,6 +38,16 @@ and open the template in the editor.
                     </td>
                     <td><h:message for="sueldoDeseado" /></td>
                 </tr>
+                <tr>
+                    <td><h:outputLabel for="fechaNacimiento" value="Fecha de nacimiento" /></td>
+                    <td>
+                        <h:inputText id="fechaNacimiento" required="true"
+                                     value="#{candidato.fechaNacimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:inputText>
+                    </td>
+                    <td><h:message for="fechaNacimiento" /></td>
+                </tr>
             </table>
             <h:commandButton value="Enviar" action="#{vacanteForm.enviar}" />
         </h:form>
