@@ -6,11 +6,15 @@
 package com.example.bolsatrabajo.beans.helper;
 
 import com.example.bolsatrabajo.beans.model.Colonia;
+import com.example.bolsatrabajo.beans.servicio.ColoniaService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.inject.Named;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -19,15 +23,15 @@ import javax.inject.Named;
 @RequestScoped
 @Named
 public class ColoniaHelper {
+    
+    private static final Log log = LogFactory.getLog(ColoniaHelper.class);
+    
+    @Inject
+    ColoniaService coloniaService;
+    
     public List<Colonia> getColonias() {
-        List<Colonia> colonias = new ArrayList<>();
-        long coloniaId = 1;
-        Colonia colonia = new Colonia(coloniaId++, "Nápoles", 3810);//no anteponer el cero, sino es un valor octal
-        colonias.add(colonia);
-        colonia = new Colonia(coloniaId++, "Polanco", 11530);
-        colonias.add(colonia);
-        colonia = new Colonia(coloniaId++, "Del Valle Centro", 3100);
-        colonias.add(colonia);
+        List<Colonia> colonias = coloniaService.findAll();
+        log.info("Recuperamos el listado de personas del EJB");
         return colonias;
     }
     
