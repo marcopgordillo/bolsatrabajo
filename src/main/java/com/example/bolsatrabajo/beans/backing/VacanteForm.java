@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIInput;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,16 +27,15 @@ import org.apache.commons.logging.LogFactory;
 public class VacanteForm {
     
     private static final Log log = LogFactory.getLog(VacanteForm.class);
-
-    /**
-     * Creates a new instance of VacanteForm
-     */
+   
+    @Inject
+    private Candidato candidato;
+    
+    private boolean comentarioEnviado= false;
+    
     public VacanteForm() {
         log.info("Creando objeto VacanteForm");
     }
-    
-    @Inject
-    private Candidato candidato;
 
     public Candidato getCandidato() {
         return candidato;
@@ -43,6 +43,14 @@ public class VacanteForm {
 
     public void setCandidato(Candidato candidato) {
         this.candidato = candidato;
+    }
+
+    public boolean isComentarioEnviado() {
+        return comentarioEnviado;
+    }
+
+    public void setComentarioEnviado(boolean comentarioEnviado) {
+        this.comentarioEnviado = comentarioEnviado;
     }
     
     // Metodo de flujo de control
@@ -86,4 +94,9 @@ public class VacanteForm {
             facesContext.renderResponse();
         }
     }
+    
+    public void ocultarComentario (ActionEvent actionEvent) {
+        this.comentarioEnviado = !this.comentarioEnviado;
+    }
+
 }
