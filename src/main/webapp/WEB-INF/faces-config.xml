@@ -10,7 +10,7 @@
     </lifecycle>
     <application>
         <locale-config>
-            <default-locale>en</default-locale>
+            <default-locale>es</default-locale>
         </locale-config>
         <!--etiquetas del formulario-->
         <resource-bundle>
