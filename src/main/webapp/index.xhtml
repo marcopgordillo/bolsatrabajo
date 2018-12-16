@@ -6,18 +6,37 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Hola Mundo JSF</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         <h:form>
-            <table>
+            <h:messages globalOnly="true" ></h:messages>
+            <table border="0">
                 <tr>
                     <td><h:outputLabel for="nombre" value="Nombre:" /></td>
-                    <td><h:inputText id="nombre" value="#{candidato.nombre}" /></td>
+                    <td><h:inputText id="nombre"  required="true"
+                                     value="#{candidato.nombre}" /></td>
                     <td><h:message for="nombre" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel for="apellido" value="Apellido:" /></td>
+                    <td><h:inputText id="apellido" required="true"
+                                     value="#{candidato.apellido}"/></td>
+                    <td><h:message for="apellido" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel for="sueldoDeseado" value="Sueldo Deseado:" /></td>
+                    <td>
+                        <h:inputText id="sueldoDeseado" required="true"
+                                         value="#{candidato.sueldoDeseado}">
+                            <f:validateLongRange minimum="1000" maximum="50000" />
+                        </h:inputText>
+                    </td>
+                    <td><h:message for="sueldoDeseado" /></td>
                 </tr>
             </table>
             <h:commandButton value="Enviar" action="#{vacanteForm.enviar}" />

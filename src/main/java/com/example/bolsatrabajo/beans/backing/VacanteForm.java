@@ -7,6 +7,8 @@ package com.example.bolsatrabajo.beans.backing;
 
 import com.example.bolsatrabajo.beans.model.Candidato;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.logging.Log;
@@ -42,8 +44,19 @@ public class VacanteForm {
     
     // Metodo de flujo de control
     public String enviar(){
+        log.info("enviar() Nombre=" + this.candidato.getNombre());
+        log.info("enviar() Apellido=" + this.candidato.getApellido());
+        log.info("enviar() Sueldo deseado=" + this.candidato.getSueldoDeseado());
+
         if (this.candidato.getNombre().equals("Juan")) {
-            log.info("Entrando al caso de exito");
+            if (this.candidato.getApellido().equals("Perez")) {
+                String msg = "Gracias, pero Juan Perez ya trabaja con nosotros.";
+                FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                String clientId = null; //Este es un mensaje global
+                facesContext.addMessage(clientId, facesMessage);
+                return "index";
+            }
             return "exito"; // exito.xhtml
         } else {
             log.info("Entrando al caso de fallo");
