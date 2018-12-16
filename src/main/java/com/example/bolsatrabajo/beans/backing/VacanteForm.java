@@ -5,6 +5,7 @@
  */
 package com.example.bolsatrabajo.beans.backing;
 
+import com.example.bolsatrabajo.beans.helper.FacesContextHelper;
 import com.example.bolsatrabajo.beans.model.Candidato;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -97,6 +98,8 @@ public class VacanteForm {
     
     public void ocultarComentario (ActionEvent actionEvent) {
         this.comentarioEnviado = !this.comentarioEnviado;
+        FacesContext facesContext =FacesContext.getCurrentInstance();
+        FacesContextHelper.limpiarImmediateFacesMessages(facesContext);
     }
 
 }
